@@ -1,21 +1,35 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { Main } from './src/Main';
+
+const MOCK_TASKS = [
+  {
+    id: 1,
+    task: "Cortar el pasto",
+    completed: false
+  },
+  {
+    id: 2,
+    task: "Barrer el patio",
+    completed: false
+  },{
+    id: 3,
+    task: "Lavar el auto",
+    completed: false
+  },{
+    id: 4,
+    task: "Acomodar la bici",
+    completed: false
+  },{
+    id: 5,
+    task: "Peinar a Pancho",
+    completed: false
+  },
+]
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Hola, Coder!</Text>
-      <Text>Entrega de Tomas Fuentes</Text>
-      <StatusBar style="auto" />
-    </View>
+      <Main tasks={MOCK_TASKS}/>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
