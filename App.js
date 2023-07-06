@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { Main } from './src/Main';
+import { Main } from './src/Screens/Main';
 
 const MOCK_TASKS = [
   {
