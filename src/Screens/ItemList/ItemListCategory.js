@@ -4,15 +4,15 @@ import products from "../../Data/products.json";
 import { Product } from "../../Components/Product";
 import { InputSearch } from "../../Components/Header/InputSearch";
 
-export const ItemListCategory = ({ navigation, route, changeHeader }) => {
-  const [actualCategory, setActualCategory] = useState("");
+export const ItemListCategory = ({ navigation, route }) => {
   const [actualProducts, setActualProducts] = useState([]);
   const [searchWord, setSearchWord] = useState("");
   const [error, setError] = useState("");
 
+  const { category } = route.params;
+
   const handleBack = () => {
-    setCategory(""); // seteo la categoria al valor "neutro"
-    changeHeader("Products"); // cambio el header al valor predeterminado
+    navigation.navigate("Main");
   };
 
   const handleSearch = (input) => {
@@ -31,11 +31,11 @@ export const ItemListCategory = ({ navigation, route, changeHeader }) => {
   useEffect(() => {
     const productsFiltered = products.filter(
       (producto) =>
-        producto.category === actualCategory && //Si el producto esta dentro de la categoria deseada
+        producto.category === category && //Si el producto esta dentro de la categoria deseada
         producto.title.toLocaleLowerCase().includes(searchWord.toLowerCase()) // si el nombre del producto incluye la palabra ingresada en el input
     );
     setActualProducts(productsFiltered);
-  }, [actualCategory, searchWord]);
+  }, [category, searchWord]);
 
   return (
     <View style={styles.container}>

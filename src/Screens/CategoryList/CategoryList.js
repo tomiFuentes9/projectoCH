@@ -3,18 +3,14 @@ import React from "react";
 import { Category } from "./Category";
 import categories from "../../Data/categories.json";
 
-export const CategoryList = ({ navigation, changeHeader }) => {
+export const CategoryList = ({ navigation }) => {
   return (
     <View style={styles.categoryView}>
       <FlatList
         data={categories}
         keyExtractor={(item) => item}
         renderItem={({ item }) => (
-          <Category
-            item={item}
-            navigation={navigation}
-            changeHeader={changeHeader}
-          />
+          <Category item={item} navigation={navigation} />
         )}
         showsVerticalScrollIndicator={false}
       />

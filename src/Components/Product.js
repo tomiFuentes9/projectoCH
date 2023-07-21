@@ -3,12 +3,15 @@ import React from "react";
 import { Card } from "./Card";
 
 export const Product = ({ item, navigation }) => {
-  const handlePress = (id) => {
-    navigation.navigate("ProductDetail");
+  const handlePress = () => {
+    navigation.navigate("ProductDetail", {
+      product: item.id,
+      title: item.title,
+    });
   };
 
   return (
-    <Pressable onPress={handlePress(item.id)}>
+    <Pressable onPress={handlePress}>
       <Card additionalStyle={styles.additionalStylesCard}>
         <Text>{item.title}</Text>
         <Image
