@@ -1,30 +1,54 @@
 import { Main } from "../Screens/Main";
 import { Header } from "../Components/Header/Header";
 import { StyleSheet, View } from "react-native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
-import { useState } from "react";
-import { ItemListCategory } from "../Screens/ItemList/ItemListCategory";
-import { ProductDetail } from "../Screens/ItemList/ProductDetail";
+import { ShopStack } from "./ShopStack";
+import { CartStack } from "./CartStack";
+import { FontAwesome } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
 
-const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 export const Navigator = () => {
   return (
     <View style={styles.home}>
       <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="Main"
-          screenOptions={({ route, navigation }) => ({
-            header: () => {
-              return <Header route={route} navigation={navigation} />;
-            },
-          })}
+        <Tab.Navigator
+          screenOptions={{
+            headerShown: false,
+            tabBarShowLabel: false,
+            tabBarStyle: styles.tab,
+          }}
         >
-          <Stack.Screen name="Main" component={Main} />
-          <Stack.Screen name="ItemListCategory" component={ItemListCategory} />
-          <Stack.Screen name="ProductDetail" component={ProductDetail} />
-        </Stack.Navigator>
+          {/* Revisar error de importacion en estos componentes:
+          <Tab.Screen
+            name="Shop"
+            component={ShopStack}
+            options={{
+              tabBarIcon: () => {
+                return (
+                  <View>
+                    <FontAwesome name="shopping-cart" size={24} color="black" />
+                  </View>
+                );
+              },
+            }}
+          />
+           <Tab.Screen
+            name="Cart"
+            component={CartStack}
+            options={{
+              tabBarIcon: () => {
+                return (
+                  <View>
+                    <Entypo name="shop" size={24} color="black" />
+                  </View>
+                );
+              },
+            }}
+          /> */}
+        </Tab.Navigator>
       </NavigationContainer>
     </View>
   );
@@ -33,5 +57,16 @@ export const Navigator = () => {
 const styles = StyleSheet.create({
   home: {
     flex: 1,
+  },
+  tab: {
+    backgroundColor: "#b8860b",
+    shadowColor: "black",
+    elevation: 4,
+    position: "absolute",
+    bottom: 25,
+    left: 20,
+    right: 20,
+    borderRadius: 15,
+    height: 90,
   },
 });
