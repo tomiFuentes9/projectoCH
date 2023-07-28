@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { ShopStack } from "./ShopStack";
 import { CartStack } from "./CartStack";
+import { OrderStack } from "./OrderStack";
 import { FontAwesome } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 
@@ -21,7 +22,6 @@ export const Navigator = () => {
             tabBarStyle: styles.tab,
           }}
         >
-          {/* Revisar error de importacion en estos componentes:
           <Tab.Screen
             name="Shop"
             component={ShopStack}
@@ -35,7 +35,8 @@ export const Navigator = () => {
               },
             }}
           />
-           <Tab.Screen
+
+          <Tab.Screen
             name="Cart"
             component={CartStack}
             options={{
@@ -47,7 +48,20 @@ export const Navigator = () => {
                 );
               },
             }}
-          /> */}
+          />
+          <Tab.Screen
+            name="Orders"
+            component={OrderStack}
+            options={{
+              tabBarIcon: () => {
+                return (
+                  <View>
+                    <FontAwesome name="list-ul" size={24} color="black" />
+                  </View>
+                );
+              },
+            }}
+          />
         </Tab.Navigator>
       </NavigationContainer>
     </View>

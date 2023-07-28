@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "../Components/Header/Header";
+import { Header } from "../Components/Header/Header";
 import { ItemListCategory } from "../Screens/ItemList/ItemListCategory";
 import { ProductDetail } from "../Screens/ItemList/ProductDetail";
 import { Main } from "../Screens/Main";

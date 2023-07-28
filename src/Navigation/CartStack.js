@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "../Components/Header/Header";
+import { Header } from "../Components/Header/Header";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Cart } from "../Screens/Cart";
 

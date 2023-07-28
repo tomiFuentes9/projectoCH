@@ -1,19 +1,22 @@
 import { StyleSheet, Text, View } from "react-native";
+import { Feather } from "@expo/vector-icons";
 import React from "react";
-import { Entypo } from "@expo/vector-icons";
 
-export const CartItem = ({ cartItem }) => {
-  console.log(cartItem);
+export const OrderItem = ({ order }) => {
+  const total = order.items.reduce(
+    (acc, currentItem) => (acc += currentItem.price * currentItem.quantity),
+    0
+  );
+
   return (
     <View style={styles.card} onPress={() => {}}>
       <View style={styles.textContainer}>
         <Text style={styles.text}>
-          {cartItem.title} ({cartItem.quantity})
+          {new Date(order.createdAt).toLocaleString()}
         </Text>
-        <Text style={styles.text2}>{cartItem.brand}</Text>
-        <Text style={styles.text2}>${cartItem.price}</Text>
+        <Text style={styles.text2}>${total}</Text>
       </View>
-      <Entypo name="trash" size={30} color="black" />
+      <Feather name="search" size={30} color="black" />
     </View>
   );
 };
@@ -38,12 +41,12 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: "inter",
-    fontSize: 19,
+    fontSize: 17,
     color: "black",
   },
   text2: {
     fontFamily: "inter",
-    fontSize: 14,
+    fontSize: 19,
     color: "black",
   },
 });

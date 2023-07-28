@@ -4,10 +4,9 @@ import CartData from "../Data/cart.json";
 import { CartItem } from "../Components/Cart/CartItem";
 
 export const Cart = () => {
-  console.log(CartData);
   const total = CartData.reduce(
-    (acumulador, currentItem) =>
-      (acumulador += currentItem.price * currentItem.quantity),
+    (counter, currentItem) =>
+      (counter += currentItem.price * currentItem.quantity),
     0
   );
 
@@ -21,7 +20,7 @@ export const Cart = () => {
         }}
       />
       <View style={styles.totalContainer}>
-        <Pressable>
+        <Pressable style={styles.confirmPressable}>
           <Text>Confirm</Text>
         </Pressable>
         <Text>Total: ${total}</Text>
@@ -37,8 +36,11 @@ const styles = StyleSheet.create({
     marginBottom: 120,
   },
   totalContainer: {
-    flexDirection: "row",
+    flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+  },
+  confirmPressable: {
+    marginRight: 2,
   },
 });
