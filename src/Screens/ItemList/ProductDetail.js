@@ -1,34 +1,29 @@
 import { Button, Image, Pressable, StyleSheet, Text, View } from "react-native";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import products from "../../Data/products.json";
+import { useSelector } from "react-redux";
 
 export const ProductDetail = ({ navigation, route }) => {
   const { product: idSelected } = route.params;
 
-  const [product, setProduct] = useState("");
-
-  useEffect(() => {
-    //Encontrar el producto por su id
-    const productSelected = products.find(
-      (producto) => producto.id === idSelected
-    );
-    setProduct(productSelected);
-  }, [idSelected]);
+  const productSelected = useSelector(
+    (state) => state.shopReducer.value.productSelected
+  );
 
   return (
     <View>
       <Button onPress={() => navigation.goBack()} title="Volver" />
-      {product && (
+      {productSelected && (
         <View style={styles.container}>
           <Image
-            source={{ uri: product.images[0] }}
+            source={{ uri: productSelected.images[0] }}
             style={styles.image}
             resizeMode="cover"
           />
           <View style={styles.textContainer}>
-            <Text style={styles.text}>{product.title}</Text>
-            <Text style={styles.text}>{product.description}</Text>
-            <Text style={styles.text}>${product.price}</Text>
+            <Text style={styles.text}>{productSelected.title}</Text>
+            <Text style={styles.text}>{productSelected.description}</Text>
+            <Text style={styles.text}>${productSelected.price}</Text>
             <Button title="Añadir al carrito"></Button>
           </View>
         </View>

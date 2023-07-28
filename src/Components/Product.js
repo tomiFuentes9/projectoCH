@@ -1,9 +1,13 @@
 import { Image, Pressable, StyleSheet, Text } from "react-native";
-import React from "react";
 import { Card } from "./Card";
+import { useDispatch } from "react-redux";
+import { setProductSelected } from "../Features/Shop/shopSlice";
 
 export const Product = ({ item, navigation }) => {
+  const dispatch = useDispatch();
+
   const handlePress = () => {
+    dispatch(setProductSelected(item));
     navigation.navigate("ProductDetail", {
       product: item.id,
       title: item.title,

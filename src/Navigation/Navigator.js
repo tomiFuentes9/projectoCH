@@ -26,10 +26,14 @@ export const Navigator = () => {
             name="Shop"
             component={ShopStack}
             options={{
-              tabBarIcon: () => {
+              tabBarIcon: ({ focused }) => {
                 return (
                   <View>
-                    <FontAwesome name="shopping-cart" size={24} color="black" />
+                    <FontAwesome
+                      name="shopping-cart"
+                      size={24}
+                      color={focused ? "white" : "black"}
+                    />
                   </View>
                 );
               },
@@ -40,10 +44,14 @@ export const Navigator = () => {
             name="Cart"
             component={CartStack}
             options={{
-              tabBarIcon: () => {
+              tabBarIcon: ({ focused }) => {
                 return (
                   <View>
-                    <Entypo name="shop" size={24} color="black" />
+                    <Entypo
+                      name="shop"
+                      size={24}
+                      color={focused ? "white" : "black"}
+                    />
                   </View>
                 );
               },
@@ -53,10 +61,14 @@ export const Navigator = () => {
             name="Orders"
             component={OrderStack}
             options={{
-              tabBarIcon: () => {
+              tabBarIcon: ({ focused }) => {
                 return (
                   <View>
-                    <FontAwesome name="list-ul" size={24} color="black" />
+                    <FontAwesome
+                      name="list-ul"
+                      size={24}
+                      color={focused ? "white" : "black"}
+                    />
                   </View>
                 );
               },

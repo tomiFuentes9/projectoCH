@@ -4,12 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   increment,
   decrement,
-  incrementByAmount,
+  incrementByValue,
 } from "../Features/Counter/counterSlice";
 
 export const Counter = () => {
   const [total, setTotal] = useState(0);
-
   const dispatch = useDispatch();
   const count = useSelector((state) => state.counterReducer.value);
 
@@ -26,20 +25,20 @@ export const Counter = () => {
       </View>
       <View style={styles.buttonsContainer}>
         <TextInput
-          placeholder="Cantidad a aumentar"
+          placeholder="Cantidad"
           style={styles.spanInput}
           onChangeText={setTotal}
           value={total}
         />
         <Pressable
           style={styles.button}
-          onPress={() => dispatch(incrementByAmount(Number(total)))}
+          onPress={() => dispatch(incrementByValue(Number(total)))}
         >
-          <Text style={styles.buttonText}>Add</Text>
+          <Text style={styles.buttonText}>Agregar</Text>
         </Pressable>
       </View>
       <Pressable style={styles.button}>
-        <Text style={styles.buttonText}>Reset</Text>
+        <Text style={styles.buttonText}>Limpiar</Text>
       </Pressable>
     </View>
   );
@@ -65,14 +64,14 @@ const styles = StyleSheet.create({
     backgroundColor: "coral",
   },
   span: {
-    backgroundColor: "black",
+    backgroundColor: "darksalmon",
     width: "60%",
     padding: 10,
     textAlign: "center",
     fontSize: 20,
   },
   spanInput: {
-    backgroundColor: "darksalmon ",
+    backgroundColor: "coral",
     width: "60%",
     padding: 10,
     textAlign: "center",

@@ -3,13 +3,16 @@ import { useEffect, useState } from "react";
 import products from "../../Data/products.json";
 import { Product } from "../../Components/Product";
 import { InputSearch } from "../../Components/Header/InputSearch";
+import { useSelector } from "react-redux";
 
-export const ItemListCategory = ({ navigation, route }) => {
+export const ItemListCategory = ({ navigation }) => {
   const [actualProducts, setActualProducts] = useState([]);
   const [searchWord, setSearchWord] = useState("");
   const [error, setError] = useState("");
 
-  const { category } = route.params;
+  const productsSelected = useSelector(
+    (state) => state.shopReducer.value.productsSelected
+  );
 
   const handleBack = () => {
     navigation.navigate("Main");
@@ -29,13 +32,11 @@ export const ItemListCategory = ({ navigation, route }) => {
   };
 
   useEffect(() => {
-    const productsFiltered = products.filter(
-      (producto) =>
-        producto.category === category && //Si el producto esta dentro de la categoria deseada
-        producto.title.toLocaleLowerCase().includes(searchWord.toLowerCase()) // si el nombre del producto incluye la palabra ingresada en el input
+    const productsFiltered = productsSelected.filter((producto) =>
+      producto.title.toLocaleLowerCase().includes(searchWord.toLowerCase())
     );
     setActualProducts(productsFiltered);
-  }, [category, searchWord]);
+  }, [productsSelected, searchWord]);
 
   return (
     <View style={styles.container}>
