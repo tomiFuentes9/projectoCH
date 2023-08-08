@@ -3,7 +3,6 @@ import React from "react";
 import { Entypo } from "@expo/vector-icons";
 
 export const CartItem = ({ cartItem }) => {
-  console.log(cartItem);
   return (
     <View style={styles.card} onPress={() => {}}>
       <View style={styles.textContainer}>

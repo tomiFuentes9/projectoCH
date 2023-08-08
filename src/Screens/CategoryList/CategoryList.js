@@ -1,7 +1,7 @@
 import { StyleSheet, FlatList, View } from "react-native";
 import React from "react";
 import { Category } from "./Category";
-import { useGetCategoriesQuery } from "../Services/shopServices";
+import { useGetCategoriesQuery } from "../../Services/shopServices";
 
 export const CategoryList = ({ navigation }) => {
   const { data: categories, isLoading, isError } = useGetCategoriesQuery();

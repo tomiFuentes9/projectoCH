@@ -4,15 +4,22 @@ import products from "../../Data/products.json";
 import { Product } from "../../Components/Product";
 import { InputSearch } from "../../Components/Header/InputSearch";
 import { useSelector } from "react-redux";
+import { useGetProductsByCategoryQuery } from "../../Services/shopServices";
 
 export const ItemListCategory = ({ navigation }) => {
   const [actualProducts, setActualProducts] = useState([]);
   const [searchWord, setSearchWord] = useState("");
   const [error, setError] = useState("");
 
-  const productsSelected = useSelector(
-    (state) => state.shopReducer.value.productsSelected
+  const categorySelected = useSelector(
+    (state) => state.shopReducer.value.categorySelected
   );
+
+  const {
+    data: productsSelected,
+    isError,
+    isLoading,
+  } = useGetProductsByCategoryQuery(categorySelected);
 
   const handleBack = () => {
     navigation.navigate("Main");
@@ -32,7 +39,7 @@ export const ItemListCategory = ({ navigation }) => {
   };
 
   useEffect(() => {
-    const productsFiltered = productsSelected.filter((producto) =>
+    const productsFiltered = productsSelected?.filter((producto) =>
       producto.title.toLocaleLowerCase().includes(searchWord.toLowerCase())
     );
     setActualProducts(productsFiltered);

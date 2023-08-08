@@ -1,9 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { database_url } from "../Database/firebaseConfig";
+import { realtime_database_url } from "../Database/firebaseConfig";
 
-export const shopAPI = createApi({
-  reducerPath: "shopAPI",
-  baseQuery: fetchBaseQuery({ baseUrl: database_url }),
+export const shopApi = createApi({
+  reducerPath: "shopApi",
+  baseQuery: fetchBaseQuery({ baseUrl: realtime_database_url }),
   endpoints: (builder) => ({
     getCategories: builder.query({
       query: () => `categories.json`,
@@ -44,4 +44,4 @@ export const {
   useGetProductsByCategoryQuery,
   useGetProductByIdQuery,
   usePostCartMutation,
-} = shopAPI;
+} = shopApi;
