@@ -1,5 +1,6 @@
 import { Main } from "../Screens/Main";
 import { Header } from "../Components/Header/Header";
+import { useSelector } from "react-redux";
 import { StyleSheet, View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
@@ -8,73 +9,80 @@ import { CartStack } from "./CartStack";
 import { OrderStack } from "./OrderStack";
 import { FontAwesome } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
+import { AuthStack } from "./AuthStack";
 
 const Tab = createBottomTabNavigator();
 
 export const Navigator = () => {
+  const { email } = useSelector((state) => state.userReducer.value);
+
   return (
     <View style={styles.home}>
       <NavigationContainer>
-        <Tab.Navigator
-          screenOptions={{
-            headerShown: false,
-            tabBarShowLabel: false,
-            tabBarStyle: styles.tab,
-          }}
-        >
-          <Tab.Screen
-            name="Shop"
-            component={ShopStack}
-            options={{
-              tabBarIcon: ({ focused }) => {
-                return (
-                  <View>
-                    <FontAwesome
-                      name="shopping-cart"
-                      size={24}
-                      color={focused ? "white" : "black"}
-                    />
-                  </View>
-                );
-              },
+        {email ? (
+          <Tab.Navigator
+            screenOptions={{
+              headerShown: false,
+              tabBarShowLabel: false,
+              tabBarStyle: styles.tab,
             }}
-          />
+          >
+            <Tab.Screen
+              name="Shop"
+              component={ShopStack}
+              options={{
+                tabBarIcon: ({ focused }) => {
+                  return (
+                    <View>
+                      <FontAwesome
+                        name="shopping-cart"
+                        size={24}
+                        color={focused ? "white" : "black"}
+                      />
+                    </View>
+                  );
+                },
+              }}
+            />
 
-          <Tab.Screen
-            name="Cart"
-            component={CartStack}
-            options={{
-              tabBarIcon: ({ focused }) => {
-                return (
-                  <View>
-                    <Entypo
-                      name="shop"
-                      size={24}
-                      color={focused ? "white" : "black"}
-                    />
-                  </View>
-                );
-              },
-            }}
-          />
-          <Tab.Screen
-            name="Orders"
-            component={OrderStack}
-            options={{
-              tabBarIcon: ({ focused }) => {
-                return (
-                  <View>
-                    <FontAwesome
-                      name="list-ul"
-                      size={24}
-                      color={focused ? "white" : "black"}
-                    />
-                  </View>
-                );
-              },
-            }}
-          />
-        </Tab.Navigator>
+            <Tab.Screen
+              name="Cart"
+              component={CartStack}
+              options={{
+                tabBarIcon: ({ focused }) => {
+                  return (
+                    <View>
+                      <Entypo
+                        name="shop"
+                        size={24}
+                        color={focused ? "white" : "black"}
+                      />
+                    </View>
+                  );
+                },
+              }}
+            />
+            <Tab.Screen
+              name="Orders"
+              component={OrderStack}
+              options={{
+                tabBarIcon: ({ focused }) => {
+                  return (
+                    <View>
+                      <FontAwesome
+                        name="list-ul"
+                        size={24}
+                        color={focused ? "white" : "black"}
+                      />
+                    </View>
+                  );
+                },
+              }}
+            />
+          </Tab.Navigator>
+        ) : (
+          <AuthStack />
+        )}
       </NavigationContainer>
     </View>
   );
