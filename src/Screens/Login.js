@@ -20,22 +20,27 @@ export const Login = ({ navigation }) => {
   const [triggerLogin, result] = useLoginMutation();
 
   const onSubmit = () => {
-    const isValidVariableEmail = isValidEmail(email);
-    const isCorrectPassword = isAtLeastSixCharacters(password);
+    try {
+      const isValidVariableEmail = isValidEmail(email);
+      const isCorrectPassword = isAtLeastSixCharacters(password);
 
-    if (isValidVariableEmail && isCorrectPassword) {
-      triggerLogin({
-        email,
-        password,
-        returnSecureToken: true,
-      });
+      if (isValidVariableEmail && isCorrectPassword) {
+        triggerLogin({
+          email,
+          password,
+          returnSecureToken: true,
+        });
+      }
+
+      if (!isValidVariableEmail) setErrorEmail("Email is not correct");
+      else setErrorEmail("");
+      if (!isCorrectPassword)
+        setErrorPassword("Password must be at least 6 characters");
+      else setErrorPassword("");
+    } catch (err) {
+      console.log("Catch error");
+      console.log(err.message);
     }
-
-    if (!isValidVariableEmail) setErrorEmail("Email is not correct");
-    else setErrorEmail("");
-    if (!isCorrectPassword)
-      setErrorPassword("Password must be at least 6 characters");
-    else setErrorPassword("");
   };
 
   useEffect(() => {
@@ -57,16 +62,16 @@ export const Login = ({ navigation }) => {
         <View>
           <Text style={styles.title}>Ingresa para empezar!!</Text>
         </View>
-        <Form label={"email"} onChange={() => {}} error={""} />
+        <Form label={"email"} onChange={setEmail} error={""} />
         <Form
           label={"password"}
-          onChange={() => {}}
+          onChange={setPassword}
           error={""}
           isSecure={true}
         />
         <SubmitButton onPress={onSubmit} title="Enviar" />
         <Text style={styles.sub}>No tenes una cuenta?</Text>
-        <Pressable onPress={() => navigation.navigate("Signup")}>
+        <Pressable onPress={() => navigation.navigate("Register")}>
           <Text style={styles.subLink}>Registrate</Text>
         </Pressable>
       </View>
