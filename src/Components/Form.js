@@ -31,21 +31,21 @@ const styles = StyleSheet.create({
   subtitle: {
     width: "90%",
     fontSize: 16,
-    fontFamily: "Inter",
+    fontFamily: "inter",
   },
   error: {
     fontSize: 16,
     color: "red",
-    fontFamily: "Inter",
+    fontFamily: "inter",
     fontStyle: "italic",
   },
   input: {
     width: "90%",
     borderWidth: 0,
     borderBottomWidth: 3,
-    borderBottomColor: "darkSalmon",
+    borderBottomColor: "red",
     padding: 2,
-    fontFamily: "Inter",
+    fontFamily: "inter",
     fontSize: 14,
   },
 });

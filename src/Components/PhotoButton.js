@@ -1,9 +1,15 @@
 import { Pressable, StyleSheet, Text } from "react-native";
-import React from "react";
 
-export const SubmitButton = ({ onPress, title }) => {
+export const PhotoButton = ({
+  title = "",
+  onPress = () => {},
+  color = "red",
+}) => {
   return (
-    <Pressable onPress={onPress} style={styles.button}>
+    <Pressable
+      style={{ ...styles.button, backgroundColor: color }}
+      onPress={onPress}
+    >
       <Text style={styles.text}>{title}</Text>
     </Pressable>
   );
@@ -11,16 +17,16 @@ export const SubmitButton = ({ onPress, title }) => {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: "chocolate",
-    borderRadius: 6,
+    width: "80%",
+    borderWidth: 1,
+    backgroundColor: "coral",
     justifyContent: "center",
     alignItems: "center",
     padding: 8,
-    width: "60%",
   },
   text: {
-    color: "black",
     fontFamily: "inter",
-    fontSize: 22,
+    fontSize: 18,
+    color: "black",
   },
 });

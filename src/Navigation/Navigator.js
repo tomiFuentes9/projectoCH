@@ -10,6 +10,7 @@ import { OrderStack } from "./OrderStack";
 import { FontAwesome } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { AuthStack } from "./AuthStack";
+import { ProfileStack } from "./ProfileStack";
 
 const Tab = createBottomTabNavigator();
 
@@ -74,6 +75,19 @@ export const Navigator = () => {
                         size={24}
                         color={focused ? "white" : "black"}
                       />
+                    </View>
+                  );
+                },
+              }}
+            />
+            <Tab.Screen
+              name="Profile"
+              component={ProfileStack}
+              options={{
+                tabBarIcon: ({ focused }) => {
+                  return (
+                    <View>
+                      <Entypo name="user" size={24} color="black" />
                     </View>
                   );
                 },

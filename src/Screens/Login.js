@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 22,
-    fontFamily: "Inter",
+    fontFamily: "inter",
   },
   sub: {
     fontSize: 14,
