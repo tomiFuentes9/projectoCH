@@ -1,6 +1,5 @@
-import { Main } from "../Screens/Main";
-import { Header } from "../Components/Header/Header";
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { StyleSheet, View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
@@ -11,11 +10,32 @@ import { FontAwesome } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { AuthStack } from "./AuthStack";
 import { ProfileStack } from "./ProfileStack";
+import { getSession } from "../SQLite";
 
 const Tab = createBottomTabNavigator();
 
 export const Navigator = () => {
-  const { email } = useSelector((state) => state.userReducer.value);
+  const { email, localId } = useSelector((state) => state.userReducer.value);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        console.log("Getting session...");
+        const session = await getSession();
+        console.log("Sesion: ");
+        console.log(session);
+        if (session?.rows.length) {
+          const user = session.rows._array[0];
+          dispatch(setUser(user));
+        }
+      } catch (error) {
+        console.log("Error getting session");
+        console.log(error.message);
+      }
+    })();
+  }, []);
 
   return (
     <View style={styles.home}>

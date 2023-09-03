@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../Features/User/userSlice";
 import { isValidEmail } from "../Validators/mail";
 import { isAtLeastSixCharacters } from "../Validators/password";
+import { insertSession } from "../SQLite";
 
 export const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -44,16 +45,32 @@ export const Login = ({ navigation }) => {
   };
 
   useEffect(() => {
-    if (result.isSuccess) {
-      dispatch(
-        setUser({
-          email: result.data.email,
-          idToken: result.data.idToken,
-          localId: result.data.localId,
-          profileImage: "",
-        })
-      );
-    }
+    (async () => {
+      try {
+        if (result.isSuccess) {
+          //Insert session in SQLite database
+          console.log("inserting Session");
+          const response = await insertSession({
+            idToken: result.data.idToken,
+            localId: result.data.localId,
+            email: result.data.email,
+          });
+          console.log("Session inserted: ");
+          console.log(response);
+
+          dispatch(
+            setUser({
+              email: result.data.email,
+              idToken: result.data.idToken,
+              localId: result.data.localId,
+              profileImage: "",
+            })
+          );
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    })();
   }, [result]);
 
   return (
