@@ -8,13 +8,11 @@ import store from "./src/Store/store";
 export default function App() {
   useEffect(() => {
     init()
-      .then((result) => {
-        console.log("Db initialized/dropped");
-        console.log(result);
+      .then(() => {
+        console.log("Inicializada la BDD/Dropeada");
       })
       .catch((error) => {
-        console.log("Initialization DB failed:");
-        console.log(error.message);
+        console.log("No se pudo inicializar la DB:", error.message);
       });
   }, []);
 

@@ -33,7 +33,6 @@ export const ItemListCategory = ({ navigation }) => {
       setSearchWord(input);
       setError("");
     } else {
-      console.log("Solo letras y números");
       setError("Solo letras y números");
     }
   };

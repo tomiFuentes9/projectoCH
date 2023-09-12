@@ -39,8 +39,7 @@ export const Login = ({ navigation }) => {
         setErrorPassword("Password must be at least 6 characters");
       else setErrorPassword("");
     } catch (err) {
-      console.log("Catch error");
-      console.log(err.message);
+      console.log("Error:", err.message);
     }
   };
 
@@ -49,14 +48,12 @@ export const Login = ({ navigation }) => {
       try {
         if (result.isSuccess) {
           //Insert session in SQLite database
-          console.log("inserting Session");
           const response = await insertSession({
             idToken: result.data.idToken,
             localId: result.data.localId,
             email: result.data.email,
           });
-          console.log("Session inserted: ");
-          console.log(response);
+          console.log("Sesión insertada");
 
           dispatch(
             setUser({
@@ -82,6 +79,7 @@ export const Login = ({ navigation }) => {
         <Form label={"email"} onChange={setEmail} error={""} />
         <Form
           label={"password"}
+          type="text"
           onChange={setPassword}
           error={""}
           isSecure={true}

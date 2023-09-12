@@ -60,8 +60,7 @@ export const Register = ({ navigation }) => {
         setErrorConfirmPassword("Passwords must match");
       else setErrorConfirmPassword("");
     } catch (err) {
-      console.log("Catch error");
-      console.log(err.message);
+      console.log("Error: ", err.message);
     }
   };
 

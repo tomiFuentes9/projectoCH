@@ -11,28 +11,27 @@ import { Entypo } from "@expo/vector-icons";
 import { AuthStack } from "./AuthStack";
 import { ProfileStack } from "./ProfileStack";
 import { getSession } from "../SQLite";
+import { setUser } from "../Features/User/userSlice";
 
 const Tab = createBottomTabNavigator();
 
 export const Navigator = () => {
   const { email, localId } = useSelector((state) => state.userReducer.value);
+  const cartItems = useSelector((state) => state.cartReducer.value.items);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     (async () => {
       try {
-        console.log("Getting session...");
         const session = await getSession();
-        console.log("Sesion: ");
-        console.log(session);
+
         if (session?.rows.length) {
           const user = session.rows._array[0];
           dispatch(setUser(user));
         }
       } catch (error) {
-        console.log("Error getting session");
-        console.log(error.message);
+        console.log("No fue posible traer la sesión", error.message);
       }
     })();
   }, []);
@@ -80,6 +79,12 @@ export const Navigator = () => {
                       />
                     </View>
                   );
+                },
+                tabBarBadge: cartItems.length > 0 ? cartItems.length : 0,
+                tabBarBadgeStyle: {
+                  backgroundColor: "black",
+                  color: "white",
+                  fontSize: 11,
                 },
               }}
             />

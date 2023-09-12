@@ -1,10 +1,27 @@
-import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  FlatList,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+  ToastAndroid,
+} from "react-native";
 import React from "react";
 import { CartItem } from "../Components/Cart/CartItem";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { usePostCartMutation } from "../Services/shopServices";
+import { clearCart } from "../Features/Cart/cartSlice";
 
 export const Cart = () => {
+  const showCartel = () => {
+    ToastAndroid.show(
+      "Tu orden fue confirmada con exito!! Recibiras los datos del pedido a tu mail",
+      ToastAndroid.SHORT,
+      ToastAndroid.CENTER
+    );
+  };
+
   const {
     items: CartData,
     total,
@@ -12,10 +29,15 @@ export const Cart = () => {
     user,
   } = useSelector((state) => state.cartReducer.value);
 
+  const { email, localId } = useSelector((state) => state.userReducer.value);
+
   const [triggerPostCart, result] = usePostCartMutation();
+  const dispatch = useDispatch();
 
   const handleConfirm = () => {
-    triggerPostCart({ total, CartData, user, updatedAt });
+    triggerPostCart({ total, CartData, email, updatedAt });
+    dispatch(clearCart());
+    showCartel();
   };
 
   return (

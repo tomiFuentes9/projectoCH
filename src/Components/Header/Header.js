@@ -23,14 +23,11 @@ export const Header = ({ route, navigation }) => {
 
   const onLogout = async () => {
     try {
-      console.log("Deleting session...");
       const response = await deleteSession(localId);
-      console.log("Session deleted: ");
-      console.log(response);
+      console.log("Session eliminada");
       dispatch(logOut());
     } catch (error) {
-      console.log("Error while sign out:");
-      console.log(error.message);
+      console.log("No fue posible eliminar la sesion:", error.message);
     }
   };
 
