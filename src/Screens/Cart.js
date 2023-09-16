@@ -35,9 +35,17 @@ export const Cart = () => {
   const dispatch = useDispatch();
 
   const handleConfirm = () => {
-    triggerPostCart({ total, CartData, email, updatedAt });
-    dispatch(clearCart());
-    showCartel();
+    if (total > 0) {
+      triggerPostCart({ total, CartData, email, updatedAt });
+      dispatch(clearCart());
+      showCartel();
+    } else {
+      ToastAndroid.show(
+        "Debes agregar por lo menos un producto al carrito para continuar",
+        ToastAndroid.SHORT,
+        ToastAndroid.CENTER
+      );
+    }
   };
 
   return (
@@ -49,12 +57,18 @@ export const Cart = () => {
           return <CartItem cartItem={item} />;
         }}
       />
-      <View style={styles.totalContainer}>
-        <Pressable onPress={handleConfirm} style={styles.confirmPressable}>
-          <Text>Confirmar</Text>
-        </Pressable>
-        <Text>Total: ${total}</Text>
-      </View>
+      {total > 0 && (
+        <View style={styles.totalContainer}>
+          <Pressable
+            disabled={total < 1}
+            onPress={handleConfirm}
+            style={styles.confirmPressable}
+          >
+            <Text>Confirmar</Text>
+          </Pressable>
+          <Text>Total: ${total}</Text>
+        </View>
+      )}
     </View>
   );
 };

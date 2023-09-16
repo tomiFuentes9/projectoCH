@@ -2,11 +2,13 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
 export const OrderItem = ({ order }) => {
+  const data = Object.values(order)[0];
+
   return (
-    <View style={styles.card} onPress={() => {}}>
+    <View style={styles.card}>
       <View style={styles.textContainer}>
-        <Text style={styles.text}>{order.updatedAt}</Text>
-        <Text style={styles.text2}>${order.total}</Text>
+        <Text style={styles.text}>{data.updatedAt}</Text>
+        <Text style={styles.text2}>${data.total}</Text>
       </View>
     </View>
   );
